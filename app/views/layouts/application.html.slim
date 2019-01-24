@@ -11,4 +11,6 @@ html
     .app-title.navar.navar-expand-md.navar-light.bg-light
       .navar-brand Taskleaf
     .container
-    = yield
+      - if flash.notice.present?
+        .alert.alert-success = flash.notice
+      = yield
