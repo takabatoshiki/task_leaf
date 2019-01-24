@@ -1,8 +1,10 @@
 class TasksController < ApplicationController
   def index
+    @tasks = Task.all
   end
 
   def show
+    @task = Task.find(params[:id])
   end
 
   def new
@@ -14,7 +16,6 @@ class TasksController < ApplicationController
     task.save!
     redirect_to tasks_url, notice: "タスク「#{task.name}」を登録しました。"
   end
-
 
   def edit
   end
