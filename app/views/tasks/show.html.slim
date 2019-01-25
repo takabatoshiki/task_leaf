@@ -18,4 +18,6 @@ table.table.table-hover
       td= @task.created_at
     tr
       th= Task.human_attribute_name(:updated_at)
-      td= @task.updated_at 
+      td= @task.updated_at
+
+= link_to  "編集", edit_task_path, class:  "btn btn-primary mr-3"
