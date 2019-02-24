@@ -2,7 +2,8 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = current_user.tasks.recent
+    @q = current_user.tasks.ransack(params[:q])
+    @tasks = @q.result(distinct: true)
   end
 
   def show
@@ -45,6 +46,13 @@ class TasksController < ApplicationController
     render :new unless @task.valid?
   end
   
+  def self.ransackable_attributes(auth_object = null)
+    %w[name created_at]
+  end
+  
+  def self.ransackabke_associations(auth_object = nil)
+    []
+  end
 
   private
     def task_params
