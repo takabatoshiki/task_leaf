@@ -12,8 +12,10 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users
   end
-  
-  resources :tasks do
-    post :confirm, action: :confirm_new, on: :new
-  end
+
+  resources :tasks
+
+  # resources :tasks do
+  #   post :confirm, action: :confirm_new, on: :new
+  # end
 end

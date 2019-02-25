@@ -16,10 +16,10 @@ class TasksController < ApplicationController
   def create
     @task = current_user.tasks.new(task_params)
 
-    if params[:back].present?
-      render :new
-      return
-    end
+    # if params[:back].present?
+    #   render :new
+    #   return
+    # end
 
     if @task.save
       TaskMailer.creation_email(@task).deliver_now
@@ -42,10 +42,10 @@ class TasksController < ApplicationController
     redirect_to tasks_url, notice: "タスク「#{@task.name}」を削除しました。"
   end
 
-  def confirm_new
-    @task = current_user.tasks.new(task_params)
-    render :new unless @task.valid?
-  end
+  # def confirm_new
+  #   @task = current_user.tasks.new(task_params)
+  #   render :new unless @task.valid?
+  # end
   
   def self.ransackable_attributes(auth_object = null)
     %w[name created_at]
@@ -57,7 +57,7 @@ class TasksController < ApplicationController
 
   private
     def task_params
-      params.require(:task).permit(:name, :description)
+      params.require(:task).permit(:name, :description, :image)
     end
 
     def set_task
